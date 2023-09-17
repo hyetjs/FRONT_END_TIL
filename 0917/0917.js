@@ -94,6 +94,11 @@ const generatedMockPosts = (n) =>
       isLiked: false,
     }));
 console.log(generatedMockPosts(10));
+// 이터러블(순회가능 한) 오브젝트
+//     객체의 값 중에 Symbol.iterator(반복자) -> next, previous의 명령어
+//     가 있는 객체를 이터러블 오브젝트
+//     일반 객체는 이터러블하지 않기 때문에 순회가 불가능
+
 // 모듈화 (module.js 참고)
 // 모듈 -> 한가지 이상의 기능을 하고 있는 코드 집단
 //     * 재사용성 , 유지보수
