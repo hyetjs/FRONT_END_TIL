@@ -10,7 +10,7 @@ const numArr = [2, 3, 4, 5, 6, 7, 8, 9, 10];
 const reduceResult = numArr.reduce((sum, n) => {
   console.log(sum, n);
   return sum + n;
-});
+},3);
 console.log(reduceResult);
 // reduce ((누적값,현재요소)=>{})
 // sum의 기본값은 첫번째 요소인 1이며,n의 기본값은 다음요소인 2부터 시작
@@ -44,7 +44,7 @@ console.log(sortArr2);
 
 // 배열의 생성
 // Array. from(객체,()=>{ })
-// 유사 배열 객체를 배열화
+// 유사 배열 객체를 배열화  
 // * 유사 배열 객체
 // -> 키 값이 인덱스이고 length 속성을 갖고 있는 배열
 
@@ -74,8 +74,10 @@ console.log(arr3);
 
 // Array().fill()
 // Array(10) -> 배열 생성
-// ex) Array(10).fill(0).map(()=>{
-// })
+let test = Array(10).fill(0).map(()=>{
+})
+
+console.log(test)
 
 // Array().fill().map()
 // 함수 표현식의 {}과 객체 표현식의 {}이 겹침으로써 return 생략이 불가
