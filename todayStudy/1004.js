@@ -28,10 +28,10 @@ function say_bye(name) {
 }
 
 introduce("최", "혜선", say_hello);
-// 결과 -> 안녕하세요 제 이름은 홍길동입니다
+// 결과 -> 안녕하세요 제 이름은 최혜선입니다
 
 introduce("최", "혜선", say_bye);
-// 결과 -> 지금까지 홍길동이었습니다. 안녕히계세요
+// 결과 -> 지금까지 최혜선이었습니다. 안녕히계세요
 
 let button = document.getElementById("button"); // 버튼 요소를 선택
 
