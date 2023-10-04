@@ -54,9 +54,9 @@ console.log(doubled); // [2, 4, 6, 8, 10]
 
 // for...in문은 객체의 열거가능한 properties를 임의의 순서로 반복, for...of문은 iterable한 객체를 반복
 const obj = {
-  name: "John",
-  age: 30,
-  city: "New York",
+  name: "Hyesun",
+  age: 26,
+  city: "Seoul",
 };
 
 for (let key in obj) {
