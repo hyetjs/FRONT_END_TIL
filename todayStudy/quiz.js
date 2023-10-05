@@ -25,21 +25,23 @@ console.log(division(arr, divideSize));
 /*
 변수 위치 찾기
 
-해당 문제는 해석하기에 따라 답변이 다를 수 있습니다.
-본인이 이해한 방향으로 문제를 풀이하셔도 괜찮습니다
+변수 a는 main 함수 안에서 사용된다
+변수 b는 dom api selector로 다른 함수에서 재사용 될 수 있다
 
-변수 a는 main 함수 안에서만 사용된다
-변수 b는 해당 js 어디에서든 사용된다
-변수 c는 메인 함수 안에서 실행되는 콜백함수 solution의 인자이다
+변수 c와 solution은 각각 main의 매개변수 및 콜백함수이다.
+변수 c는 콜백함수 solution의 매게변수로 사용된다.
 
-변수 d는 solution에서 전달받은 c를 다른 형태로 바꿔주는 임의의 함수이며 solution 함수의 반환 값이다.
-변수 e는 main함수의 최종 반환 값으로 향후 다른 함수에서 재사용된다.
+변수 d는 main의 콜백함수인 솔루션 함수에서 전달받은 c와 연산할 변수이다.
+변수 e는 main함수의 최종 반환 값으로 solution에서 d와 c를 더한 값의 반환 값이기도 하다.
+
+문제 해석은 각기 다를 수 있습니다. 중요한 것은 자신만의 관념으로 변수 위치를 찾는 것으로
+따로 답이 존재하지 않습니다.
 */
 
-// function solution() {}
+function solution() {}
 
-// function parse() {}
+function parse() {}
 
-// function main() {
-//   solution();
-// }
+function main() {
+  solution();
+}
