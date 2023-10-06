@@ -31,7 +31,7 @@
       #list {
         border: 1px solid #ededed;
       }
-      .selected {
+      .on {
         background-color: #ffb6c1;
         color: gray;
       }
@@ -70,8 +70,8 @@
 
       $tabHost.forEach((tab) => {
         tab.addEventListener("click", () => {
-          $tabHost.forEach((tab) => tab.classList.remove("selected"));
-          tab.classList.add("selected");
+          $tabHost.forEach((tab) => tab.classList.remove("on"));
+          tab.classList.add("on");
         });
       });
 
