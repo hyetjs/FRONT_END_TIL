@@ -35,6 +35,16 @@
         background-color: #ffb6c1;
         color: gray;
       }
+      .disp > form > p::after {
+        content: "";
+        border-right: 2px solid black;
+        animation: blink 0.7s infinite;
+      }
+      @keyframes blink {
+        to {
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body>
@@ -65,9 +75,28 @@
       </div>
     </div>
     <script>
-      const $tabHost = document.querySelectorAll(".tab");
-      const $tabBody = document.querySelectorAll(".block");
+      let text = document.querySelector("p");
+      let content = document.querySelector("p").textContent;
+      let contentIndex = content.length;
+      let typingIndex = 0;
+      let typingText = "블로그 보다가 신기해서 따라 만들어봤어요😅";
+      function typing() {
+        if (contentIndex >= 2) {
+          text.textContent = content.slice(0, contentIndex);
+          contentIndex--;
+        } else {
+          if (typingIndex < typingText.length) {
+            text.textContent += typingText[typingIndex];
+            typingIndex++;
+          }
+        }
+      }
+      setInterval(typing, 100);
 
+      let $tabHost = document.querySelectorAll(".tab");
+      let $tabBody = document.querySelectorAll(".block");
+      let $displayText = document.querySelector(".content > .disp p");
+      console.log($displayText.textContent);
       $tabHost.forEach((tab) => {
         tab.addEventListener("click", () => {
           $tabHost.forEach((tab) => tab.classList.remove("on"));
@@ -77,9 +106,9 @@
 
       $tabHost.forEach((tab) => {
         tab.addEventListener("click", () => {
-          const tabText = tab.innerText;
+          let tabText = tab.innerText;
           $tabBody.forEach((block) => {
-            const blockText = block.innerText;
+            let blockText = block.innerText;
             if (blockText.includes(tabText)) {
               block.style.display = "block";
             } else {

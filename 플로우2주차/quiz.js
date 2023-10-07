@@ -37,10 +37,18 @@ console.log(division(arr, divideSize));
 문제 해석은 각기 다를 수 있습니다. 중요한 것은 자신만의 관념으로 변수 위치를 찾는 것으로
 따로 답이 존재하지 않습니다.
 */
-function solution() {}
 
-function parse() {}
+let b = parseInt(document.getElementById("b").textContent);
 
-function main() {
-  solution();
+function solution(c) {
+  let d = 5;
+  return c + d;
 }
+
+function main(c, sol) {
+  let a = b * c;
+  let e = sol(a);
+  return e;
+}
+
+console.log(main(3, solution));
