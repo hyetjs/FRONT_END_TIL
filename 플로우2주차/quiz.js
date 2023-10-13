@@ -38,17 +38,17 @@ console.log(division(arr, divideSize));
 따로 답이 존재하지 않습니다.
 */
 
-let b = parseInt(document.getElementById("b").textContent);
+// let b = parseInt(document.getElementById("b").textContent);
 
-function solution(c) {
-  let d = 5;
-  return c + d;
-}
+// function solution(c) {
+//   let d = 5;
+//   return c + d;
+// }
 
-function main(c, sol) {
-  let a = b * c;
-  let e = sol(a);
-  return e;
-}
+// function main(c, sol) {
+//   let a = b * c;
+//   let e = sol(a);
+//   return e;
+// }
 
-console.log(main(3, solution));
+// console.log(main(3, solution));

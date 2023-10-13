@@ -38,7 +38,7 @@
       .disp > form > p::after {
         content: "";
         border-right: 2px solid black;
-        animation: blink 0.7s infinite;
+        animation: blink 0.8s infinite;
       }
       @keyframes blink {
         to {
@@ -95,8 +95,8 @@
 
       let $tabHost = document.querySelectorAll(".tab");
       let $tabBody = document.querySelectorAll(".block");
+ 
       let $displayText = document.querySelector(".content > .disp p");
-      console.log($displayText.textContent);
       $tabHost.forEach((tab) => {
         tab.addEventListener("click", () => {
           $tabHost.forEach((tab) => tab.classList.remove("on"));
