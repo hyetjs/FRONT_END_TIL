@@ -65,4 +65,3 @@ bankSelector.addEventListener("change", () => {
     accountList.append(li);
   });
 });
-
