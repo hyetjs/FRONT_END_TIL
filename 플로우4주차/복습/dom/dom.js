@@ -24,13 +24,22 @@ const users = [
     height: 175,
   },
 ];
-
+const $button = document.querySelectorAll("button")
+const prev = $button[0]
+const next = $button[1]
+prev.addEventListener(()=>{
+  
+})
 const $info = document.querySelector('#info');
 $info.innerHTML = `
     <div>${users[0].name}</div>
     <div>${users[0].age}</div>
     <div>${users[0].height}</div>
 `;
+
+prev.addEventListener(()=>{
+  console.log("hello")
+})
 
 /* 
 유저 목록 순서대로 보여주기

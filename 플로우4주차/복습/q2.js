@@ -25,29 +25,15 @@ const users = [
   },
 ];
 
-let newUsers = [
-  {
+const AddUser = (userName, userAge, userHeight) => {
+  users.push({
     id: Math.floor(Math.random() * 100),
-    name: "김옥지",
-    age: 20,
-    height: 180,
-  },
-  {
-    id: Math.floor(Math.random() * 100),
-    name: "김빵빵",
-    age: 20,
-    height: 175,
-  },
-];
-
-newUsers.forEach((newUser) => {
-  const userId = users.some((user) => user.id === newUser.id);
-  if (!userId) {
-    users.push(newUser);
-  } else {
-    console.log("중복된 id가 존재합니다");
-  }
-});
+    name: userName,
+    age: userAge,
+    height: userHeight,
+  });
+};
+AddUser("오옹", 12, 120);
 
 console.log(users);
 
