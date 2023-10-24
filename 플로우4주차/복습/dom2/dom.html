@@ -6,6 +6,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script defer type="module" src="./dom.js"></script>
     <title>댓글 작성하기</title>
+    <style>
+      body {
+        width: 30%;
+      }
+      h3 {
+        border-bottom: 1px solid rgb(233, 94, 117);
+      }
+      div > p {
+        height: 200px;
+      }
+      span {
+        font-size: 12px;
+        position: absolute;
+        left: 392px;
+        top: 76px;
+      }
+      ul {
+        padding: 0;
+      }
+      li {
+        padding: 8px;
+        margin-bottom: 8px;
+        list-style: none;
+        border: 1px solid black;
+      }
+    </style>
   </head>
   <body>
     <section>
@@ -14,8 +40,9 @@
     </section>
     <section>
       <h1>댓글 목록</h1>
-      <input /><button>추가</button>
-      <ul id="replies-list"></ul>
+      <input/><button>추가</button>
+      <ul id="replies-list">
+      </ul>
     </section>
   </body>
 </html>
