@@ -13,9 +13,8 @@ for (const key in user) {
   console.log(`Key: ${key}, Value: ${value}`);
 }
 
-const findKey = Object.keys(user).filter(key => user[key] === "김성용");
-console.log(findKey)
-
+const findKey = Object.keys(user).filter((key) => user[key] === "김성용");
+console.log(findKey);
 
 // 문제1. 위의 객체를 아래의 메소드를 이용하여 반환 값을 출력 하고 각 메소드의 기능을 정의할 것
 
