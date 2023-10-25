@@ -1,18 +1,61 @@
 const musicListData = [
   {
-    src: './assets/image/iu_0.jpg',
-    color: ['#0272a4', '#f6a564'],
+    src: "./assets/img/iu_0.jpg",
+    color: ["#0272a4", "#f6a564"],
   },
   {
-    src: './assets/image/iu_1.jpg',
-    color: ['#b6bfc8', '#36595b'],
+    src: "./assets/img/iu_1.jpg",
+    color: ["#b6bfc8", "#36595b"],
   },
   {
-    src: './assets/image/iu_2.jpg',
-    color: ['#e58e82', '#6f569f'],
+    src: "./assets/img/iu_2.jpg",
+    color: ["#e58e82", "#6f569f"],
   },
 ];
+const imgUl = document.querySelector("ul");
+const playBtnGroup = document.querySelectorAll(".play_btn_group button");
+const listBtnGroup = document.querySelectorAll(".list_btn_group button");
+const disk = document.querySelector(".disk");
+const cover = document.querySelector(".filter");
+let musicSelect;
 
+const renderMusicImg = (list) => {
+  const img = document.createElement("img");
+  img.setAttribute("src", list.src);
+  imgUl.append(img);
+
+  img.addEventListener("click", () => {
+    if (musicSelect) {
+      musicSelect.classList.remove("musicSelect");
+    }
+    img.classList.add("musicSelect");
+    musicSelect = img;
+  });
+};
+
+playBtnGroup[0].addEventListener("click", () => {
+  if (musicSelect) {
+    disk.style.animation = "rotateAni 2s linear infinite";
+    // style="background: url('./assets/img/iu_0.jpg') no-repeat center;"
+    cover.style.background = `url(${musicSelect.src}) no-repeat center`;
+    cover.style.backgroundSize = "cover";
+    cover.style.filter = `blur(8px)`;
+    cover.style.opacity = 1;
+  } else {
+    alert("선택된 음악이 없습니다");
+  }
+});
+
+playBtnGroup[1].addEventListener("click", () => {
+  disk.style.animationPlayState = "paused";
+  cover.style.opacity = 0;
+});
+
+for (list of musicListData) {
+  renderMusicImg({
+    ...list,
+  });
+}
 /*
 
 문제1.
