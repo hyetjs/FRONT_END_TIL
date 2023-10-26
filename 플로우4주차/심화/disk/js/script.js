@@ -12,16 +12,23 @@ const musicListData = [
     color: ["#e58e82", "#6f569f"],
   },
 ];
+
 const imgUl = document.querySelector("ul");
+const diskInner = document.querySelector(".disk_inner")
+const main = document.querySelector("main");
 const playBtnGroup = document.querySelectorAll(".play_btn_group button");
 const listBtnGroup = document.querySelectorAll(".list_btn_group button");
 const disk = document.querySelector(".disk");
 const cover = document.querySelector(".filter");
 let musicSelect;
-
-const renderMusicImg = (list) => {
-  const img = document.createElement("img");
+let selectId;
+let selectMusicColor;
+//
+const renderAlbumImg = (list) => {
+  let img = document.createElement("img");
+  let musicId = imgUl.children.length;
   img.setAttribute("src", list.src);
+  img.setAttribute("musicId", musicId);
   imgUl.append(img);
 
   img.addEventListener("click", () => {
@@ -30,9 +37,29 @@ const renderMusicImg = (list) => {
     }
     img.classList.add("musicSelect");
     musicSelect = img;
+    selectId = musicSelect.getAttribute("musicId");
+    selectMusicColor = musicListData[parseInt(selectId)].color;
+    main.style.background = `linear-gradient(120deg, ${selectMusicColor[0]}, ${selectMusicColor[1]})`;
+    diskInner.style.backgroundColor = `${selectMusicColor[0]}`
   });
 };
 
+listBtnGroup[1].addEventListener("click", () => {
+  nextMusicId = (parseInt(selectId) + 1) % imgUl.children.length;
+  const nextImage = imgUl.querySelector(`[musicId="${nextMusicId}"]`);
+
+  if (musicSelect) {
+    musicSelect.classList.remove("musicSelect");
+  }
+  nextImage.classList.add("musicSelect");
+  musicSelect = nextImage;
+  selectId = nextMusicId;
+  selectMusicColor = musicListData[parseInt(nextMusicId)].color;
+  main.style.background = `linear-gradient(120deg, ${selectMusicColor[0]}, ${selectMusicColor[1]})`;
+  diskInner.style.backgroundColor = `${selectMusicColor[0]}`
+});
+
+// stop버튼을 누르지 않으면 opacity때문에 나타나는 효과가 안보이는데 어떻게 해결해야할지 모르겠다,,,,,호흡곤란온다,,
 playBtnGroup[0].addEventListener("click", () => {
   if (musicSelect) {
     disk.style.animation = "rotateAni 2s linear infinite";
@@ -40,7 +67,8 @@ playBtnGroup[0].addEventListener("click", () => {
     cover.style.background = `url(${musicSelect.src}) no-repeat center`;
     cover.style.backgroundSize = "cover";
     cover.style.filter = `blur(8px)`;
-    cover.style.opacity = 1;
+    cover.style.animation = "upToDown 1s ease";
+    cover.style.opacity = "1";
   } else {
     alert("선택된 음악이 없습니다");
   }
@@ -48,11 +76,12 @@ playBtnGroup[0].addEventListener("click", () => {
 
 playBtnGroup[1].addEventListener("click", () => {
   disk.style.animationPlayState = "paused";
-  cover.style.opacity = 0;
+  cover.style.animation = "downToUp 1s ease";
+  cover.style.opacity = "0";
 });
 
 for (list of musicListData) {
-  renderMusicImg({
+  renderAlbumImg({
     ...list,
   });
 }
@@ -64,12 +93,12 @@ for (list of musicListData) {
 
     요구사항
     
-        (1) 구현영상을 참고하여 구현영상과 같은 효과를 진행해보세요
-        (2) play 버튼 클릭시에는 해당 이미지에 맞는 이미지가 배경화면으로 보이고 disk가 회전되어야합니다
-        (3) stop 버튼을 누르면 배경화면이 사라지고 disk는 멈추어야합니다.
-        (4) 앨범은 총 3개가 있으며 만약 진행 중 다른 앨범을 선택하고 play를 누르면 다른 앨범이 play 되어야합니다.
-        (5) 앨범 리스트는 (next, prev) 버튼으로도 움직일 수 있으며 클릭으로도 원하는 앨범으로 이동할 수 있습니다.
-        (6) 현재 선택된 앨범은 focus되어 크기가 커지는 효과를 추가해야합니다.
+        (1) 구현영상을 참고하여 구현영상과 같은 효과를 진행해보세요 
+        (2) play 버튼 클릭시에는 해당 이미지에 맞는 이미지가 배경화면으로 보이고 disk가 회전되어야합니다 o
+        (3) stop 버튼을 누르면 배경화면이 사라지고 disk는 멈추어야합니다. o
+        (4) 앨범은 총 3개가 있으며 만약 진행 중 다른 앨범을 선택하고 play를 누르면 다른 앨범이 play 되어야합니다. o
+        (5) 앨범 리스트는 (next, prev) 버튼으로도 움직일 수 있으며 클릭으로도 원하는 앨범으로 이동할 수 있습니다. o
+        (6) 현재 선택된 앨범은 focus되어 크기가 커지는 효과를 추가해야합니다. o
         (7) 저작권 상 음악은 넣지 못했지만 만약 넣고 싶다면 본인이 다운로드 하여 audio 태그를 활용하여 실행할 수 있습니다.
         (8) 이 외 다른 구현 사항은 영상을 참고하여 만들어보세요 :)
 
