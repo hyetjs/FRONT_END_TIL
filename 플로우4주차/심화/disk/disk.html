@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="assets/css/reset.css" />
+    <link rel="icon" href="http://127.0.0.1:8001/%ED%94%8C%EB%A1%9C%EC%9A%B04%EC%A3%BC%EC%B0%A8/%EC%8B%AC%ED%99%94/disk/favicon.ico" type="image/x-icon" sizes="16x16">
     <title>Disk</title>
   </head>
   <style>
@@ -27,7 +28,7 @@
       box-shadow: 4px 14px 40px rgba(0, 0, 0, 0.3);
       transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       z-index: 1000;
-      
+
       /* animation: rotateAni 2s linear infinite; */
     }
 
@@ -160,6 +161,9 @@
   </style>
   <body>
     <main>
+      <audio id="audioContainer">
+        <source id="audioSource" src="" />
+      </audio>
       <div class="filter"></div>
       <section>
         <div class="disk">

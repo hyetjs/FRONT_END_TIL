@@ -2,28 +2,33 @@ const musicListData = [
   {
     src: "./assets/img/iu_0.jpg",
     color: ["#0272a4", "#f6a564"],
+    audioSrc: "./audio/IU(아이유)-삐삐(BBIBBI).mp3",
   },
   {
     src: "./assets/img/iu_1.jpg",
     color: ["#b6bfc8", "#36595b"],
+    audioSrc: "./audio/AutumnMorning(가을 아침).mp3",
   },
   {
     src: "./assets/img/iu_2.jpg",
     color: ["#e58e82", "#6f569f"],
+    audioSrc: "./audio/IU(아이유)-eight(에잇)(feat.SUGA).mp3",
   },
 ];
 
 const imgUl = document.querySelector("ul");
-const diskInner = document.querySelector(".disk_inner")
+const diskInner = document.querySelector(".disk_inner");
 const main = document.querySelector("main");
 const playBtnGroup = document.querySelectorAll(".play_btn_group button");
 const listBtnGroup = document.querySelectorAll(".list_btn_group button");
 const disk = document.querySelector(".disk");
 const cover = document.querySelector(".filter");
+const source = document.querySelector("#audioSource");
+const audioContainer = document.querySelector("#audioContainer");
 let musicSelect;
 let selectId;
 let selectMusicColor;
-//
+
 const renderAlbumImg = (list) => {
   let img = document.createElement("img");
   let musicId = imgUl.children.length;
@@ -31,6 +36,7 @@ const renderAlbumImg = (list) => {
   img.setAttribute("musicId", musicId);
   imgUl.append(img);
 
+  // 앨범 이미지 클릭 시
   img.addEventListener("click", () => {
     if (musicSelect) {
       musicSelect.classList.remove("musicSelect");
@@ -40,10 +46,12 @@ const renderAlbumImg = (list) => {
     selectId = musicSelect.getAttribute("musicId");
     selectMusicColor = musicListData[parseInt(selectId)].color;
     main.style.background = `linear-gradient(120deg, ${selectMusicColor[0]}, ${selectMusicColor[1]})`;
-    diskInner.style.backgroundColor = `${selectMusicColor[0]}`
+    diskInner.style.backgroundColor = `${selectMusicColor[0]}`;
+    source.src = `${musicListData[parseInt(selectId)].audioSrc}`;
   });
 };
 
+// 다음 버튼
 listBtnGroup[1].addEventListener("click", () => {
   nextMusicId = (parseInt(selectId) + 1) % imgUl.children.length;
   const nextImage = imgUl.querySelector(`[musicId="${nextMusicId}"]`);
@@ -56,9 +64,29 @@ listBtnGroup[1].addEventListener("click", () => {
   selectId = nextMusicId;
   selectMusicColor = musicListData[parseInt(nextMusicId)].color;
   main.style.background = `linear-gradient(120deg, ${selectMusicColor[0]}, ${selectMusicColor[1]})`;
-  diskInner.style.backgroundColor = `${selectMusicColor[0]}`
+  diskInner.style.backgroundColor = `${selectMusicColor[0]}`;
+  source.src = `${musicListData[parseInt(nextMusicId)].audioSrc}`;
 });
 
+// 이전 버튼
+listBtnGroup[0].addEventListener("click", () => {
+  prevMusicId =
+    (parseInt(selectId) - 1 + imgUl.children.length) % imgUl.children.length;
+  const prevImage = imgUl.querySelector(`[musicId="${prevMusicId}"]`);
+
+  if (musicSelect) {
+    musicSelect.classList.remove("musicSelect");
+  }
+  prevImage.classList.add("musicSelect");
+  musicSelect = prevImage;
+  selectId = prevMusicId;
+  selectMusicColor = musicListData[parseInt(prevMusicId)].color;
+  main.style.background = `linear-gradient(120deg, ${selectMusicColor[0]}, ${selectMusicColor[1]})`;
+  diskInner.style.backgroundColor = `${selectMusicColor[0]}`;
+  source.src = `${musicListData[parseInt(prevMusicId)].audioSrc}`;
+});
+
+// play버튼 클릭 시
 // stop버튼을 누르지 않으면 opacity때문에 나타나는 효과가 안보이는데 어떻게 해결해야할지 모르겠다,,,,,호흡곤란온다,,
 playBtnGroup[0].addEventListener("click", () => {
   if (musicSelect) {
@@ -69,15 +97,19 @@ playBtnGroup[0].addEventListener("click", () => {
     cover.style.filter = `blur(8px)`;
     cover.style.animation = "upToDown 1s ease";
     cover.style.opacity = "1";
+    audioContainer.load();
+    audioContainer.play();
   } else {
     alert("선택된 음악이 없습니다");
   }
 });
 
+// stop버튼 클릭 시
 playBtnGroup[1].addEventListener("click", () => {
   disk.style.animationPlayState = "paused";
   cover.style.animation = "downToUp 1s ease";
   cover.style.opacity = "0";
+  audioContainer.pause();
 });
 
 for (list of musicListData) {
