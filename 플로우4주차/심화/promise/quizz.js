@@ -15,8 +15,22 @@
     max size
     이번주 목표까지 15% 남았습니다
 
-
 3. 조건
     기초. promise를 사용하여 구현할 것
     심화. pomise의 then catch가 아닌 async await을 사용할 것
 */
+
+new Promise((resolve, reject) => {
+  let slide = "min size";
+  console.log(slide);
+  setTimeout(() => {
+    slide = "max size";
+    console.log(slide);
+    if (slide !== "max size") {
+      reject("error");
+    }
+    resolve("이번주 목표까지 15% 남았습니다");
+  }, 2000);
+})
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
