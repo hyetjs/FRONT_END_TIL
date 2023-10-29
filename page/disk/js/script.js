@@ -2,17 +2,17 @@ const musicListData = [
   {
     src: "./assets/img/iu_0.jpg",
     color: ["#0272a4", "#f6a564"],
-    audioSrc: "./audio/IU(아이유)-삐삐(BBIBBI).mp3",
+    audioSrc: "./audio/IU-BBIBBI.mp3",
   },
   {
     src: "./assets/img/iu_1.jpg",
     color: ["#b6bfc8", "#36595b"],
-    audioSrc: "./audio/AutumnMorning(가을 아침).mp3",
+    audioSrc: "./audio/AutumnMorning.mp3",
   },
   {
     src: "./assets/img/iu_2.jpg",
     color: ["#e58e82", "#6f569f"],
-    audioSrc: "./audio/IU(아이유)-eight(에잇)(feat.SUGA).mp3",
+    audioSrc: "./audio/IU-eight(feat.SUGA).mp3",
   },
   {
     src: "./assets/img/iu_3.jpeg",
@@ -21,11 +21,6 @@ const musicListData = [
   },
   {
     src: "./assets/img/iu_04.jpeg",
-    color: ["#A0AE99", "#9A93B3"],
-    audioSrc: "./audio/LovePoem.mp3",
-  },
-  {
-    src: "./assets/img/iu_5.jpeg",
     color: ["#A0AE99", "#9A93B3"],
     audioSrc: "./audio/LovePoem.mp3",
   },
