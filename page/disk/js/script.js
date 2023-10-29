@@ -36,7 +36,7 @@ const cover = document.querySelector(".filter");
 const source = document.querySelector("#audioSource");
 const audioContainer = document.querySelector("#audioContainer");
 
-let currentPage = 0;
+let currentPage = 0;  
 const imagesPerPage = 5;
 
 let musicSelect;
@@ -159,4 +159,3 @@ for (list of musicListData) {
         (3) start 시에는 disk가 돌아가고 stop 시에는 disk가 멈춰야함
         (4) 선택된 앨범에는 하이라이트 호과가 있어야하며 클릭 및 버튼을 통해 선택이 가능함
 */
-
