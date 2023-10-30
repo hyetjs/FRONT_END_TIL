@@ -36,7 +36,7 @@ const cover = document.querySelector(".filter");
 const source = document.querySelector("#audioSource");
 const audioContainer = document.querySelector("#audioContainer");
 
-let currentPage = 0;
+let currentPage = 0;  
 const imagesPerPage = 5;
 
 let musicSelect;
