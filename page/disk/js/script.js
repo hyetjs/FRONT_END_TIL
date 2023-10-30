@@ -36,7 +36,7 @@ const cover = document.querySelector(".filter");
 const source = document.querySelector("#audioSource");
 const audioContainer = document.querySelector("#audioContainer");
 
-let currentPage = 0;  
+let currentPage = 0;
 const imagesPerPage = 5;
 
 let musicSelect;
@@ -53,9 +53,9 @@ const renderAlbumImg = (list) => {
   // 앨범 이미지 클릭 시
   img.addEventListener("click", () => {
     if (musicSelect) {
-      musicSelect.classList.remove("musicSelect");
+      musicSelect.classList.remove("play");
     }
-    img.classList.add("musicSelect");
+    img.classList.add("play");
     musicSelect = img;
     selectId = musicSelect.getAttribute("musicId");
     selectMusicColor = musicListData[parseInt(selectId)].color;
@@ -71,9 +71,9 @@ listBtnGroup[1].addEventListener("click", () => {
   const nextImage = imgUl.querySelector(`[musicId="${nextMusicId}"]`);
 
   if (musicSelect) {
-    musicSelect.classList.remove("musicSelect");
+    musicSelect.classList.remove("play");
   }
-  nextImage.classList.add("musicSelect");
+  nextImage.classList.add("play");
   musicSelect = nextImage;
   selectId = nextMusicId;
   selectMusicColor = musicListData[parseInt(nextMusicId)].color;
@@ -89,9 +89,9 @@ listBtnGroup[0].addEventListener("click", () => {
   const prevImage = imgUl.querySelector(`[musicId="${prevMusicId}"]`);
 
   if (musicSelect) {
-    musicSelect.classList.remove("musicSelect");
+    musicSelect.classList.remove("play");
   }
-  prevImage.classList.add("musicSelect");
+  prevImage.classList.add("play");
   musicSelect = prevImage;
   selectId = prevMusicId;
   selectMusicColor = musicListData[parseInt(prevMusicId)].color;

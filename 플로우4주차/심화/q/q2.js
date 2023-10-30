@@ -1,7 +1,204 @@
-import { MockPosts } from './faker.js';
-console.log(MockPosts(10));
+import { MockPosts } from "./faker.js";
+console.log(MockPosts(20));
+// id: number;           // post의 id
+// title: any;          // post 제목
+// content: any;       // post 내용
+// User: {            // post 작성자 정보
+//     id: number;
+//     nickName: any;
+//     profileImg: any;
+// };
+// createdAt: any;   // 글의 생성 날짜
+// myPost: boolean; // 지금 보고 있는 사용자가 썼냐 안썼냐 (내가작성했냐 안했냐)
 
-let totalItemCount = MockPosts(200).length;
+const posts = MockPosts(132);
+let totalItemCount = posts.length;
+const postPage = 10;
+let selectPage = 1;
+const totalPages = Math.ceil(totalItemCount / postPage);
+const buttonContainer = document.createElement("div");
+const pageBtnWrapper = document.createElement("ul");
+const prevBtn = document.createElement("button");
+const firstBtn = document.createElement("button");
+const lastBtn = document.createElement("button");
+const nextBtn = document.createElement("button");
+const postCard = document.querySelector(".post-card");
+
+prevBtn.textContent = "<(이전)";
+firstBtn.textContent = "<<(맨처음)";
+buttonContainer.append(firstBtn);
+buttonContainer.append(prevBtn);
+buttonContainer.append(pageBtnWrapper);
+lastBtn.textContent = "(마지막)>>";
+nextBtn.textContent = "(다음)>";
+buttonContainer.append(nextBtn);
+buttonContainer.append(lastBtn);
+buttonContainer.style.display = "flex";
+pageBtnWrapper.style.padding = "0";
+
+const renderPost = (startIndex, endIndex) => {
+  postCard.innerHTML = "";
+  for (let i = startIndex; i < endIndex; i++) {
+    const post = posts[i];
+    const postContainer = document.createElement("div");
+    postContainer.classList.add("post-container");
+
+    const postImg = document.createElement("img")
+    postImg.setAttribute("src","assets/img/iu_1.jpg")
+    postImg.setAttribute("width","400px")
+    postImg.classList.add("post-img")
+    
+
+    const postTitle = document.createElement("h4");
+    postTitle.classList.add("post-title");
+    postTitle.textContent = post.title;
+
+    const postContent = document.createElement("div");
+    postContent.textContent = post.content;
+
+    const replyBtn = document.createElement("button");
+    replyBtn.style.marginTop = "20px"
+    replyBtn.textContent = "댓글 보기";
+
+    const replyList = document.createElement("ul");
+    replyList.classList.add("replies-list");
+    replyList.style.display = "none";
+
+    for (const comment of post.Comments) {
+      const replyItem = document.createElement("li");
+      replyItem.classList.add("reply-item");
+      replyItem.style.alignItems= "center"
+      replyItem.style.marginBottom= "10px"
+
+      const replyUserInfo = document.createElement("div");
+      replyUserInfo.classList.add("reply-user-info");
+      replyUserInfo.style.display = "flex"
+      replyUserInfo.style.alignItems= "center"
+
+      const replyUserImg = document.createElement("img");
+      replyUserImg.setAttribute("src", "assets/img/iu_2.jpg");
+      replyUserImg.setAttribute("width", "40px");
+
+      const replyUserName = document.createElement("p");
+      replyUserName.textContent = comment.User.nickName;
+      replyUserName.style.marginLeft = "10px"
+
+      const replyContent = document.createElement("div");
+      replyContent.classList.add("reply-content");
+      replyContent.textContent = comment.content;
+
+      const replyDate = document.createElement("div");
+      replyDate.classList.add("reply-date");
+      replyDate.textContent = comment.createdAt;
+
+      replyUserInfo.append(replyUserImg);
+      replyUserInfo.append(replyUserName);
+      replyItem.append(replyUserInfo);
+      replyItem.append(replyContent);
+      replyItem.append(replyDate);
+
+      replyList.append(replyItem);
+    }
+
+    const closeBtn = document.createElement("button");
+    closeBtn.textContent = "닫기";
+    closeBtn.style.marginTop = "20px"
+    replyList.append(closeBtn);
+
+    replyBtn.addEventListener("click", () => {
+      if (replyList.style.display === "none") {
+        replyList.style.display = "block";
+      }
+    });
+    closeBtn.addEventListener("click", () => {
+      replyList.style.display = "none";
+    });
+
+    postContainer.append(postImg);
+    postContainer.append(postTitle);
+    postContainer.append(postContent);
+    postContainer.append(replyBtn);
+    postContainer.append(replyList);
+
+    postCard.append(postContainer);
+    postCard.append(buttonContainer);
+
+  }
+};
+
+// 보여질 list의 인덱스를 계산
+const pageList = () => {
+  const startIndex = (selectPage - 1) * postPage; // 130
+  const endIndex = startIndex + postPage; // 140 132
+  if (startIndex === Math.floor(totalItemCount / 10) * 10) {
+    renderPost(startIndex, totalItemCount);
+  } else {
+    renderPost(startIndex, endIndex);
+  }
+};
+
+// 게시물 갯수에 따라 버튼을 만들어주고 싶어서
+let pageBtn;
+for (let i = 1; i <= totalPages; i++) {
+  pageBtn = document.createElement("button");
+  pageBtn.textContent = i;
+  pageBtn.setAttribute("pageId", i);
+  const pageId = pageBtn.getAttribute("pageId");
+  pageBtn.addEventListener("click", () => {
+    selectPage = pageId;
+    pageList();
+    focusButton();
+  });
+  pageBtnWrapper.append(pageBtn);
+}
+const focusButton = () => {
+  const buttons = document.querySelectorAll("button[pageId]");
+  buttons.forEach((button) => {
+    const pageId = button.getAttribute("pageId");
+    console.log(selectPage);
+    if (pageId == selectPage) {
+      button.style.backgroundColor = "pink";
+    } else {
+      button.style = "none";
+    }
+  });
+};
+
+prevBtn.addEventListener("click", () => {
+  if (selectPage > 1) {
+    selectPage--;
+    pageList();
+    focusButton();
+  } else {
+    alert("첫번째 페이지입니다");
+  }
+});
+nextBtn.addEventListener("click", () => {
+  if (selectPage < totalPages) {
+    selectPage++;
+    pageList();
+    focusButton();
+  } else {
+    alert("마지막 페이지입니다");
+  }
+});
+
+firstBtn.addEventListener("click", () => {
+  postCard.innerHTML = "";
+  selectPage = 1;
+  renderPost(0, postPage);
+  focusButton();
+});
+lastBtn.addEventListener("click", () => {
+  postCard.innerHTML = "";
+  selectPage = totalPages;
+  //   renderPost(totalItemCount-10, totalItemCount);
+  renderPost(Math.floor(totalItemCount / 10) * 10, totalItemCount);
+  focusButton();
+});
+
+pageList();
+focusButton();
 
 /* 
 -----------------------------------------------------------------------------------------
@@ -35,7 +232,7 @@ let totalItemCount = MockPosts(200).length;
         ex) 현재 페이지5
         <<(맨처음) <(이전) 1 2 3 4 [5] 6 7 8 9 10 (다음)> (마지막)>>
         
-        5에 focus효과 새로고침 이후에도 5에는 focus효과가 유지되어야합니다.
+        5에 focus효과 새로고침 이후에도 5에는 focus효과가 유지되어야합니다.//  ?????
         
 
     3.  
@@ -50,7 +247,7 @@ let totalItemCount = MockPosts(200).length;
 
 요구사항
     1.
-        게시글은 페이스북 혹은 인스타그램의 형태로 한 페이지에 10개씩 보이게 됩니다.
+        게시글은 페이스북 혹은 인스타그램의 형태로 한 페이지에 10개씩 보이게 됩니다.  // ?????
         댓글은 토글 형태로 "댓글 보기"를 클릭해야만 해당 댓글을 확인할 수 있습니다.
         
     2. 
