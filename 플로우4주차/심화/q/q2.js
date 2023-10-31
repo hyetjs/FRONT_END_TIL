@@ -11,7 +11,7 @@ console.log(MockPosts(20));
 // createdAt: any;   // 글의 생성 날짜
 // myPost: boolean; // 지금 보고 있는 사용자가 썼냐 안썼냐 (내가작성했냐 안했냐)
 
-const posts = MockPosts(132);
+const posts = MockPosts(130);
 let totalItemCount = posts.length;
 const postPage = 10;
 let selectPage = 1;
@@ -33,8 +33,7 @@ lastBtn.textContent = "(마지막)>>";
 nextBtn.textContent = "(다음)>";
 buttonContainer.append(nextBtn);
 buttonContainer.append(lastBtn);
-buttonContainer.style.display = "flex";
-pageBtnWrapper.style.padding = "0";
+buttonContainer.classList.add("buttonContainer");
 
 const renderPost = (startIndex, endIndex) => {
   postCard.innerHTML = "";
@@ -43,11 +42,10 @@ const renderPost = (startIndex, endIndex) => {
     const postContainer = document.createElement("div");
     postContainer.classList.add("post-container");
 
-    const postImg = document.createElement("img")
-    postImg.setAttribute("src","assets/img/iu_1.jpg")
-    postImg.setAttribute("width","400px")
-    postImg.classList.add("post-img")
-    
+    const postImg = document.createElement("img");
+    postImg.setAttribute("src", "assets/img/iu_1.jpg");
+    postImg.setAttribute("width", "400px");
+    postImg.classList.add("post-img");
 
     const postTitle = document.createElement("h4");
     postTitle.classList.add("post-title");
@@ -57,7 +55,7 @@ const renderPost = (startIndex, endIndex) => {
     postContent.textContent = post.content;
 
     const replyBtn = document.createElement("button");
-    replyBtn.style.marginTop = "20px"
+    replyBtn.style.marginTop = "20px";
     replyBtn.textContent = "댓글 보기";
 
     const replyList = document.createElement("ul");
@@ -67,13 +65,9 @@ const renderPost = (startIndex, endIndex) => {
     for (const comment of post.Comments) {
       const replyItem = document.createElement("li");
       replyItem.classList.add("reply-item");
-      replyItem.style.alignItems= "center"
-      replyItem.style.marginBottom= "10px"
 
       const replyUserInfo = document.createElement("div");
       replyUserInfo.classList.add("reply-user-info");
-      replyUserInfo.style.display = "flex"
-      replyUserInfo.style.alignItems= "center"
 
       const replyUserImg = document.createElement("img");
       replyUserImg.setAttribute("src", "assets/img/iu_2.jpg");
@@ -81,7 +75,7 @@ const renderPost = (startIndex, endIndex) => {
 
       const replyUserName = document.createElement("p");
       replyUserName.textContent = comment.User.nickName;
-      replyUserName.style.marginLeft = "10px"
+      replyUserName.style.marginLeft = "10px";
 
       const replyContent = document.createElement("div");
       replyContent.classList.add("reply-content");
@@ -100,9 +94,27 @@ const renderPost = (startIndex, endIndex) => {
       replyList.append(replyItem);
     }
 
+    const replyCreate = document.createElement("div");
+    replyCreate.classList.add("replyCreate");
+
+    const replyInput = document.createElement("input");
+
+    const replyCreateBtn = document.createElement("button");
+    replyCreateBtn.classList.add("replyBtn");
+    replyCreateBtn.textContent = "게시";
+
+    const replyWriterImg = document.createElement("img");
+    replyWriterImg.setAttribute("src", "assets/img/iu_2.jpg");
+    replyWriterImg.setAttribute("width", "40px");
+
+    replyCreate.append(replyWriterImg);
+    replyCreate.append(replyInput);
+    replyCreate.append(replyCreateBtn);
+    replyList.append(replyCreate);
+
     const closeBtn = document.createElement("button");
     closeBtn.textContent = "닫기";
-    closeBtn.style.marginTop = "20px"
+    closeBtn.style.marginTop = "20px";
     replyList.append(closeBtn);
 
     replyBtn.addEventListener("click", () => {
@@ -122,7 +134,6 @@ const renderPost = (startIndex, endIndex) => {
 
     postCard.append(postContainer);
     postCard.append(buttonContainer);
-
   }
 };
 
